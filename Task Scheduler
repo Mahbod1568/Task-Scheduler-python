@@ -1,0 +1,41 @@
+import schedule
+import time
+from datetime import datetime
+
+# Function to display the current time
+def display_time():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print(f"Task executed at: {current_time}")
+
+# Task function 1: Daily task at a specific time (e.g., 10:30 AM)
+def morning_task():
+    print("Good morning! This is your scheduled task.")
+
+# Task function 2: Every 5 minutes
+def every_five_minutes():
+    print("Running task every 5 minutes.")
+
+# Task function 3: Every day at 6 PM
+def evening_task():
+    print("Good evening! Time for your evening task.")
+
+# Task function 4: Run every second (for demonstration)
+def frequent_task():
+    print("This task runs every second.")
+
+# Main function to schedule tasks
+def schedule_tasks():
+    # Schedule tasks at specific intervals
+    schedule.every().day.at("10:30").do(morning_task)    # Runs daily at 10:30 AM
+    schedule.every(5).minutes.do(every_five_minutes)      # Runs every 5 minutes
+    schedule.every().day.at("18:00").do(evening_task)     # Runs daily at 6 PM
+    schedule.every(1).seconds.do(frequent_task)           # Runs every second
+    
+    while True:
+        schedule.run_pending()  # Execute any pending tasks
+        time.sleep(1)           # Sleep for 1 second before checking again
+
+if __name__ == "__main__":
+    print("Task Scheduler Started")
+    schedule_tasks()
